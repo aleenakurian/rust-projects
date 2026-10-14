@@ -1,5 +1,5 @@
 use std::io;
-
+#[allow(unused_variables)]
 struct Task {
     task_desc: String,
     completed: bool,
@@ -17,7 +17,7 @@ fn main() {
 
     let mut input: String = String::new();
 
-    io::stdin().read_line(&mut input);
+    let _ = io::stdin().read_line(&mut input);
 
     let input: u32 = match input.trim().parse() {
         Ok(num) => num,
@@ -38,15 +38,15 @@ fn main() {
 }
 
 fn add_task(tasks: &mut Vec<Task>) -> () {
-    let mut desc: String::new();
+    let mut desc: String= String::new();
     println!("Enter task:");
 
-    io::stdin().read_line(&mut desc).unwrap();
+    let _ = io::stdin().read_line(&mut desc).unwrap();
 
-    let input = desc.trim();
+    // let mut input: String = desc.trim();
 
     tasks.push(Task {
-        task_desc: input,
+        task_desc: desc,
         completed: false,
     });
 }
@@ -67,7 +67,7 @@ fn finish_task(tasks: &mut Vec<Task>) -> () {
 
     let mut input: String = String::new();
 
-    io::stdin().read_line(&mut input);
+    let _ = io::stdin().read_line(&mut input);
 
     let input: u32 = match input.trim().parse() {
         Ok(num) => num,
@@ -77,8 +77,8 @@ fn finish_task(tasks: &mut Vec<Task>) -> () {
         }
     };
 
-    if input > 0 && input <= tasks.len() {
-        if let Some(task) = tasks.get_mut(input - 1) {
+    if input > 0 && (input as usize) <= tasks.len() {
+        if let Some(task) = tasks.get_mut(input as usize - 1) {
             task.completed = true;
         }
     } else {
@@ -93,7 +93,7 @@ fn delete_task(tasks: &mut Vec<Task>) -> () {
 
     let mut input: String = String::new();
 
-    io::stdin().read_line(&mut input);
+    let _ =  io::stdin().read_line(&mut input);
 
     let input: u32 = match input.trim().parse() {
         Ok(num) => num,
@@ -103,8 +103,8 @@ fn delete_task(tasks: &mut Vec<Task>) -> () {
         }
     };
 
-    if input <= tasks.len() && input>0{
-        tasks.remove(input - 1);
+    if input as usize <= tasks.len() && input>0{
+        tasks.remove(input as usize - 1);
         println!("Task removed");
     } else {
         println!("Invalid");
