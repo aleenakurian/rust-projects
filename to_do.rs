@@ -7,7 +7,7 @@ struct Task {
 
 fn main() {
     let mut tasks: Vec<Task> = Vec::new(); // tasks is a vector of type Task
-
+    loop{
     println!("To-Do List");
     println!("1. Add Task");
     println!("2. List Tasks");
@@ -32,9 +32,13 @@ fn main() {
         2 => list_task(&tasks),
         3 => finish_task(&mut tasks),
         4 => delete_task(&mut tasks),
-        5 => println!("Goodbye!"),
+        5 => {
+            println!("Goodbye!");
+             break;
+            }
         _ => println!("Invalid Choice!"),
     }
+}
 }
 
 fn add_task(tasks: &mut Vec<Task>) -> () {
